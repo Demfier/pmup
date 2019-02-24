@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Uplyft">
+    <meta name="author" content="">
+
+    <title>Uplyft</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection"/>
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/"><i class="far fa-heart"></i></a></li>
+          <li><a href="/about">How It Works</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="aboutsec">
+      Uplyft is primarily aimed to be a depression-detection tool based on speech inputs of a user. Behind the scenes, we use two models to analyze the speech input.
+
+      <ol>
+        <li>
+          <h5 class="bold">Acoustic properties of speech</h5>
+          Since a typical <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">CNN</a> requires a visual image to work on, we implement a feature extraction method that uses a <a href="https://en.wikipedia.org/wiki/Spectrogram">spectogram</a> representation, which displays the amplitude of the frequency components of the sound signal over time.
+        </li>
+        <li>
+          <h5 class="bold">Language processing of text from speech</h5>
+          This is the second model.
+        </li>
+      </ol>
+    </div>
+
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+  </body>
+</html>
