@@ -193,3 +193,9 @@ button:focus {
     50% {height:5px;transform:translateY(0px);background:#e88;}
     100% {height:5px;transform:translateY(0px);background:#fff;}
 }
+
+.logo
+{
+  margin-left: 45%;
+  width: 10%;
+}

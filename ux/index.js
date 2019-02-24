@@ -67,6 +67,16 @@ io.on('connection', function(socket) {
     // tellajoke();
   });
 
+  socket.on('requestJoke', () => {
+    console.log("A joke was requested");
+    tellajoke();
+  });
+
+  socket.on('requestQuote', () => {
+    console.log("A quote was requested");
+    tellaquote();
+  });
+
   let tellajoke = function() {
     console.log('Sending a joke');
     let idx = Math.floor(Math.random() * quotes.jokes.length);

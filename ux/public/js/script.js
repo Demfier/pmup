@@ -10,6 +10,7 @@ recognition.interimResults = true;
 recognition.maxAlternatives = 1;
 recognition.continuous = true;
 
+let interimTranscript = '';
 let finalTranscript = '';
 let reportTranscript = '';
 let prevztranscriptIdx = 0;
@@ -45,6 +46,19 @@ speakButton.addEventListener('click', () => {
     recogInput.innerHTML = '<i style="color:#ddd;">Recognized speech appears here</i>';
 
     console.log('Audio stream stopped.');
+
+    if(!reportTranscript)
+    {
+      if(finalTranscript)
+      {
+        reportTranscript = finalTranscript;
+      }
+      else if(interimTranscript)
+      {
+        reportTranscript = interimTranscript;
+      }
+    }
+
     console.log('Transcript to report: ' + reportTranscript);
 
     // we flat the left and right channels down
@@ -103,7 +117,7 @@ speakButton.addEventListener('click', () => {
     // xhttp.setRequestHeader("Content-type", "application/json");
     // xhttp.send(JSON.stringify(data));
 
-    socket.emit('textinput', reportTranscript);
+    // socket.emit('textinput', reportTranscript);
 
     $.ajax({
       type: 'POST',
@@ -111,9 +125,21 @@ speakButton.addEventListener('click', () => {
       data: blob,
       processData: false,
       contentType: false
-    }).done(function(data) {
-      console.log(data);
+    }).done(function(audioResp) {
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/text',
+        data: reportTranscript,
+        processData: false,
+        contentType: false
+      }).done(function(textResp) {
+        audioResp = parseFloat(audioResp);
+        textResp = parseFloat(textResp);
+        console.log('Audio response: ', audioResp);
+        console.log('Text response: ', textResp);
+      });
     });
+
     // socket.emit('audioblob', blob);
 
     // // Prompt to save it locally
@@ -176,7 +202,7 @@ speakButton.addEventListener('click', () => {
 });
 
 recognition.onresult = (event) => {
-  let interimTranscript = '';
+  interimTranscript = '';
   for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
     let transcript = event.results[i][0].transcript;
     if (event.results[i].isFinal) {

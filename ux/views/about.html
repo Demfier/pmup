@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Uplyft">
+    <meta name="description" content="Pmup">
     <meta name="author" content="">
 
-    <title>Uplyft</title>
+    <title>Pmup</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,18 +25,43 @@
       </div>
     </nav>
     <div class="aboutsec">
-      Uplyft is primarily aimed to be a depression-detection tool based on speech inputs of a user. Behind the scenes, we use two models to analyze the speech input.
+      <img class="logo" src="/images/icon.png"/>
+      <br>
+      Got the Monday blues?
 
+      Pmup (pronounced pump) is the perfect "Pick Me Up" app for you. It uses advanced machine learning and artificial intelligence to detect the slightest hint of sadness in your voice and motivates you. Thus, it listens, analyses and appreciates.
+
+      Behind the scenes, we use two models to analyze the speech input.
       <ol>
         <li>
           <h5 class="bold">Acoustic properties of speech</h5>
-          Since a typical <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">CNN</a> requires a visual image to work on, we implement a feature extraction method that uses a <a href="https://en.wikipedia.org/wiki/Spectrogram">spectogram</a> representation, which displays the amplitude of the frequency components of the sound signal over time.
+          We parse the audio data from the microphone and extract the <a href="https://en.wikipedia.org/wiki/Mel-frequency_cepstrum">Mel-frequency cepstrum</a>. The MFC captures various properties of the sound like loudness, pitch of the sound.  The MFC can be thought of as the the features derived from the spectrogram which is the defacto visualisation for audio data. Thus we decided to fed the MFC features to a Convolutional Neural network (CNN) which classifies the data into various emotions with a probability. The model is trained on open source datasets: <a href="https://zenodo.org/record/1188976#.XHKbs4V7nCI">1</a> and <a href="http://kahlan.eps.surrey.ac.uk/savee/Download.html">2</a>. The model has an accuracy of about 75%.
         </li>
         <li>
-          <h5 class="bold">Language processing of text from speech</h5>
-          This is the second model.
+          <h5 class="bold">Text properties of speech</h5>
+          Next we use the HTML5 speech2Text engine to convert the audio file to text. Here we applied some state of the art methods in Deep Learning to detect emotions from text data. Most specifically, we implemented the following paper: <a href="https://arxiv.org/abs/1810.09177">Compositional coding capsule network with k-means routing for text classification</a>, which basically uses <a href="https://arxiv.org/abs/1710.09829">capsule nets</a> for multiclass classification of the text data. This model is trained on over 3 million text instances from Yelp reviews and Amazon polarity data, and has a test accuracy of about 94%.
         </li>
       </ol>
+
+      Finally, we combined the predictions of both our models to estimate emotions in real time. Pmup then, uses this emotion classification to tell you jokes, motivate you or just be your pal.
+
+      <h5 class="bold">Privacy</h5>
+      Respecting privacy, we never store any voice data, or do any voice fingerprinting. All voice data is instantaneous analysed and deleted.
+
+      <h5 class="bold">Code</h5>
+      The code can be found on our <a href="https://github.com/Demfier/pmup">github repo</a>.
+
+      <h5 class="bold">Challenges faced, lessons learned</h5>
+      Initially we thought of creating Pmup as an Alexa skill, however Alexa doesn’t allow 3rd party developers to play with voice data so we had to resort to a web based app hosted using Flask.
+      <br>
+      Getting the right datasets was also a major challenge for us and we had to request the PI of the abovementioned papers for the data late Friday/early Saturday. Luckily we got one good dataset by Saturday evening se we were able to train our model in time.
+      <br>
+      The most difficult challenge was perhaps to train two State of the Art Deep learning models in one night and then getting them to work in tandem. We had to spend a few hours testing out app to get the right mix of probabilities.
+
+      <h5 class="bold">Next steps</h5>
+      We would have loved to make an end to end deep learning model that processes both text and audio at the same time in the same network. Right now our prediction algorithm doesn't really benefit for the text-audio interaction data and our solution is rather hacky. We would love to to use this paper: <a href="http://anthology.aclweb.org/attachments/P/P18/P18-1209.Presentation.pdf">EfficientLow-rank Multimodal Fusion With Modality-specific Factor</a> to make an end to end model.
+      <br>
+      Another flaw is that one model is in tensorflow and one is in pytorch which makes online learning althemore difficult. We should have built a common framework. Lastly, the Flask app we made is very buggy and is crash prone. We would love to create a unique UI experience around it.
     </div>
 
     <script type="text/javascript" src="../js/materialize.min.js"></script>

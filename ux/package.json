@@ -1,7 +1,7 @@
 {
   "name": "uplift",
   "version": "1.0.0",
-  "description": "Sentiment analysis with Web Speech API",
+  "description": "Sentiment analysis with Speech and Text",
   "main": "index.js",
   "scripts": {
     "start": "nf start",
