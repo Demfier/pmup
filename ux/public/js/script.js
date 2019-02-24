@@ -137,6 +137,35 @@ speakButton.addEventListener('click', () => {
         textResp = parseFloat(textResp);
         console.log('Audio response: ', audioResp);
         console.log('Text response: ', textResp);
+
+        let happy = true;
+        if (audioResp < -100)
+        {
+          happy = false;
+        }
+        else if (audioResp < -30)
+        {
+          if (textResp < -0.8)
+          {
+            happy = false;
+          }
+        }
+        else
+        {
+          if (textResp < -0.8)
+          {
+            happy = false;
+          }
+        }
+
+        if (happy)
+        {
+          socket.emit('requestJoke');
+        }
+        else
+        {
+          socket.emit('requestQuote');
+        }
       });
     });
 
