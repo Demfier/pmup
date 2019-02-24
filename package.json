@@ -7,9 +7,10 @@
     "start": "nf start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "HTV3W",
+  "author": "Tomomi Imura",
   "license": "MIT",
   "dependencies": {
+    "apiai": "^4.0.3",
     "body-parser": "^1.18.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
