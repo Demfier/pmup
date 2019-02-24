@@ -107,7 +107,7 @@ speakButton.addEventListener('click', () => {
 
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:8080/audio-message/',
+      url: 'http://localhost:8080/',
       data: blob,
       processData: false,
       contentType: false
