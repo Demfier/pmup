@@ -14,6 +14,14 @@ def query_example():
               <h1>The framework value is: {}</h1>
               <h1>The website value is: {}'''.format(language, framework, website)
 
+@app.route('/audio-message', methods = ['GET', 'POST'])
+def audio_message():
+    # Open file and write binary (blob) data
+    f = open('./file.wav', 'wb')
+    f.write(request.data)
+    f.close()
+    return "Binary message written!"
+
 @app.route('/form-example', methods=['GET', 'POST']) #allow both GET and POST requests
 def form_example():
     if request.method == 'POST': #this block is only entered when the form is submitted

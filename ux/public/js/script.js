@@ -107,13 +107,12 @@ speakButton.addEventListener('click', () => {
 
     $.ajax({
       type: 'POST',
-      dataType: 'json',
-      url: '/submitAudio/',
+      url: 'http://localhost:8080/audio-message/',
       data: blob,
       processData: false,
       contentType: false
     }).done(function(data) {
-      // console.log(data);
+      console.log(data);
     });
     // socket.emit('audioblob', blob);
 
