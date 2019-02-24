@@ -1,0 +1,9 @@
+# for python frontend
+*.pyc
+*.csv
+*.wav
+
+# for node frontend
+node_modules*
+package-lock.json
+Procfile
