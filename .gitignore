@@ -1,4 +1,4 @@
-# for python frontend
+# for python backend
 *.pyc
 *.csv
 *.wav
