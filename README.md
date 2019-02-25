@@ -30,6 +30,7 @@ Although we would be hosting the app online soon, you can follow the given steps
   - Keras (<=2.1.3)
   - Scikit-learn
   - Librosa
+- Download the pretrained model for text from [here](https://drive.google.com/open?id=1eyxOReMmiK8k67mEIJwQEx0wHn3zb3IX) and put the files `yelp.pth`, `sentence_encoder` inside the `webserver` folder
 - Run `node index.js` from the `ux` folder to start your node server
 - Open another terminal and run `flask run -p 8080` from the `webserver` folder
 - Navigate to `https://localhost:5000` in your browser
